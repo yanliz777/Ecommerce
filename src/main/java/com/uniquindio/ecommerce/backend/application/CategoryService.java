@@ -5,7 +5,7 @@ import com.uniquindio.ecommerce.backend.domain.port.ICategoryRepository;
 
 public class CategoryService {
 
-    //Inyectamos la interface ICategoryRepository para utilizar sus métodos
+    //Inyectamos por constructor la interface ICategoryRepository para utilizar sus métodos
     private final ICategoryRepository icategoryRepository;
 
     //constructor:
