@@ -6,6 +6,8 @@ import com.uniquindio.ecommerce.backend.infrastructure.entity.UserEntity;
 import com.uniquindio.ecommerce.backend.infrastructure.mapper.UserMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /*
 Hay que tener en cuenta que tenemos un modelo que es diferente a las entidades que
 estamos utilizando en el paquete adapter para persistencia,por ejemplo, en el
@@ -25,6 +27,12 @@ CRUD y de esta manera nos comunicamos con la capa del dominio, por eso se les ll
 a estas interfaces por que son el canal de comunicación entres las distintas capas. Admeás se
 hace uso de una variable de tipo IUserCrudRepository que es la interface que extiende de
 CrudRepository y esta es la que permite hacer los CRUD en la BD porque usa UserEntity
+
+
+La anotación @Repository en Spring es una especialización de
+la anotación @Component que indica que la clase marcada actúa como un
+repositorio, es decir, una clase que interactúa directamente con la
+base de datos o con la capa de persistencia.
  */
 @Repository
 public class UserCrudRepositoryImpl implements IUserRepository {
@@ -67,12 +75,24 @@ public class UserCrudRepositoryImpl implements IUserRepository {
         return null;
     }
 
-    @Override
+   /* @Override
     public User findById(Integer id) {
         /*
         tenemos que get() porque esto "userCrudRepository.findById(id)" nos
         devuelve un objeto de Tipo Optional<>
-         */
+
         return userMapper.toUser(userCrudRepository.findById(id).get());
+    }*/
+
+    @Override
+    public User findById(Integer id){
+        //Capturamos el registro del usuario que esta en la bd por su ID
+        Optional<UserEntity> userEntity = userCrudRepository.findById(id);
+
+        if(userEntity.isPresent()){
+            return userMapper.toUser(userEntity.get());
+        }else {
+            throw new RuntimeException("Usuario con id: " + id + " no existe");
+        }
     }
 }

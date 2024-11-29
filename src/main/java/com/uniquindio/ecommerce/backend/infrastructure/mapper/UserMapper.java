@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 /*
-Esta interface nos va a permitir mapear un objeto UserEntity a un objeto User.
+Esta interface nos va a permitir mapear un objeto UserEntity a un objeto User y viseversa.
 
 Con esto "@Mapper(componentModel = "spring")" indicamos que esta interface se inyecte
 en las clases en donde nosotros la necesitemos

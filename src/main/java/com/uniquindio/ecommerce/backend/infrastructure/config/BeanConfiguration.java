@@ -1,6 +1,8 @@
 package com.uniquindio.ecommerce.backend.infrastructure.config;
 
+import com.uniquindio.ecommerce.backend.application.CategoryService;
 import com.uniquindio.ecommerce.backend.application.UserService;
+import com.uniquindio.ecommerce.backend.domain.port.ICategoryRepository;
 import com.uniquindio.ecommerce.backend.domain.port.IUserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,14 +24,26 @@ crear manualmente instancias de clases (usando new), el contenedor de Spring lo 
 public class BeanConfiguration {
 
     /*
-    En este metodo indicamos que la clase UserService sea un @Bean para que
+    En este metodo indicamos que la clase UserService,CategoryService sean un @Bean para que
     spring lo gestione. Cabe recordar que a esta clase "UserService" se le inyecta
-    la interface "IUserRepository" por eso lo enviamos por parametro en este metodo. De esta
+    la interface "IUserRepository"  y lo mismo pasa con CategoryService que se le
+    inyecta ICategoryRepository, por eso lo enviamos por parametro en ests metodos. De esta
     maenra conectamos la clase UserService que esta en la clase de aplicación con la
-    con la clase que implemneta los métodos CRUD especificos para la BD(UserCrudRepositoryImpl):
+    con la clase que implemneta los métodos CRUD especificos para la BD(UserCrudRepositoryImpl,
+    CategoryCrudRepositoryImpl).
+
+    En Este caso específico, esta clase se asegura de que la clase UserService,
+    CategoryService (que es parte de la capa de aplicación) estén disponibles
+    como un bean gestionado por Spring, para que pueda ser inyectada en
+    otras partes de la aplicación, como el controlador (UserController, CategoryController).
      */
     @Bean
     public UserService userService(IUserRepository iUserRepository) {
         return new UserService(iUserRepository);
+    }
+
+    @Bean
+    public CategoryService categoryService(ICategoryRepository iCategoryRepository) {
+        return new CategoryService(iCategoryRepository);
     }
 }
