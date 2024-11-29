@@ -20,4 +20,5 @@ public class User {
     private String password;
     private UserType userType;
     private LocalDateTime dateCreated;//para guardar la fecha y hora de creación del usuario
+    private LocalDateTime dateUpdated;
 }
