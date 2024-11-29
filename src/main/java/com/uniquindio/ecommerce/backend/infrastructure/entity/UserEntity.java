@@ -1,4 +1,4 @@
-package com.uniquindio.ecommerce.backend.infrastructure;
+package com.uniquindio.ecommerce.backend.infrastructure.entity;
 
 import com.uniquindio.ecommerce.backend.domain.model.enums.UserType;
 import jakarta.persistence.*;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDateTime;
 /*
 Esta clase se va a mapear como una tabla en el BD, esta tabla se va a llamar users

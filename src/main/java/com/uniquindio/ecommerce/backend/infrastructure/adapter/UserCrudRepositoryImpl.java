@@ -2,6 +2,7 @@ package com.uniquindio.ecommerce.backend.infrastructure.adapter;
 
 import com.uniquindio.ecommerce.backend.domain.model.User;
 import com.uniquindio.ecommerce.backend.domain.port.IUserRepository;
+import com.uniquindio.ecommerce.backend.infrastructure.entity.UserEntity;
 import com.uniquindio.ecommerce.backend.infrastructure.mapper.UserMapper;
 import org.springframework.stereotype.Repository;
 
@@ -19,9 +20,11 @@ para cuando desde el front me envíen un objeto User yo lo pueda transformar a u
 de tipo UserEntity y lo pueda guardar en la BD, para esto utilizamos la libreria mapstruct
 que esta como dependencia en el archivo pom.xml.
 
-Acá se implemneta "IUserRepository" para tener acceso a los metodos crud y de esta manera
-nos comunicamos con la capa del dominio, por eso se les llama puerto a estas interfaces
-por que son el canal de comunicación entres las distintas capas.
+Acá se implemneta la interface del dominio "IUserRepository" para tener acceso a los metodos
+CRUD y de esta manera nos comunicamos con la capa del dominio, por eso se les llama puerto
+a estas interfaces por que son el canal de comunicación entres las distintas capas. Admeás se
+hace uso de una variable de tipo IUserCrudRepository que es la interface que extiende de
+CrudRepository y esta es la que permite hacer los CRUD en la BD porque usa UserEntity
  */
 @Repository
 public class UserCrudRepositoryImpl implements IUserRepository {
@@ -42,10 +45,22 @@ public class UserCrudRepositoryImpl implements IUserRepository {
         this.userMapper = userMapper;
     }
 
-    @Override
+   /* @Override
     public User save(User user) {
         return userMapper.toUser(userCrudRepository.save(userMapper.toUserEntity(user)));
-    }
+    }*/
+
+   @Override
+   public User save(User user) {
+       // 1. Convertir el User (dominio) a UserEntity (persistencia)
+       UserEntity userEntity = userMapper.toUserEntity(user);
+
+       // 2. Guardar el UserEntity en la base de datos usando el CrudRepository
+       UserEntity savedEntity = userCrudRepository.save(userEntity);
+
+       // 3. Convertir el UserEntity guardado de vuelta a User (dominio)
+       return userMapper.toUser(savedEntity);
+   }
 
     @Override
     public User findByEmail(String email) {

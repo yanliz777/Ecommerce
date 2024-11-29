@@ -26,7 +26,7 @@ public class BeanConfiguration {
     spring lo gestione. Cabe recordar que a esta clase "UserService" se le inyecta
     la interface "IUserRepository" por eso lo enviamos por parametro en este metodo. De esta
     maenra conectamos la clase UserService que esta en la clase de aplicación con la
-    con la clase que implemneta los métodos CRUD especificos para la BD:
+    con la clase que implemneta los métodos CRUD especificos para la BD(UserCrudRepositoryImpl):
      */
     @Bean
     public UserService userService(IUserRepository iUserRepository) {

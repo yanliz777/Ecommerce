@@ -1,7 +1,7 @@
 package com.uniquindio.ecommerce.backend.infrastructure.mapper;
 
 import com.uniquindio.ecommerce.backend.domain.model.User;
-import com.uniquindio.ecommerce.backend.infrastructure.UserEntity;
+import com.uniquindio.ecommerce.backend.infrastructure.entity.UserEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
