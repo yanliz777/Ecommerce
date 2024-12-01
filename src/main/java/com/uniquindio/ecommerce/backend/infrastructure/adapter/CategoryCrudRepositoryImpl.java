@@ -71,7 +71,12 @@ public class CategoryCrudRepositoryImpl implements ICategoryRepository {
 
     @Override
     public void deleteById(Integer id) {
-        //no hacemos mapeo ya que lo elimina directa,ente de la BD:
+        Optional<CategoryEntity> categoryEntity = iCategoryCrudRepository.findById(id);
+
+        if (!categoryEntity.isPresent()) {
+            throw new RuntimeException("Categoria con id: " + id + " no existe");
+        }
+        //no hacemos mapeo ya que lo elimina directamente de la BD:
         iCategoryCrudRepository.deleteById(id);
     }
 }
