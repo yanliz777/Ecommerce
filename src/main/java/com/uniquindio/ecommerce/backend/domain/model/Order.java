@@ -24,17 +24,17 @@ private List<OrderProduct> ordenProducts;
 public class Order {
     private Integer id;
     private LocalDateTime dateCreated;
-    private List<OrderProduct> ordenProducts;//Relacionamos OrderProducts con Order
-    private OrderState orderState;
+    private List<OrderProduct> orderProducts;//Relacionamos OrderProducts con Order
+    private OrderState state;
     private Integer userId;//Realcionamos Order con User por medio de su Id
 
     public Order(){
-        ordenProducts = new ArrayList<>();
+        orderProducts = new ArrayList<>();
     }
 
     //Metodo que nos calcula el total de todos los productos comprados:
     public BigDecimal getTotalOrderPrice(){
-        return this.ordenProducts.stream().map(ordenProduct ->
+        return this.orderProducts.stream().map(ordenProduct ->
                 ordenProduct.getTotalItem()).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
@@ -42,7 +42,7 @@ public class Order {
     public BigDecimal getTotalOrderPrice1() {
         BigDecimal totalPrice = BigDecimal.ZERO; // Inicializamos el total en 0
 
-        for (OrderProduct ordenProduct : this.ordenProducts) {// Recorremos la lista de productos
+        for (OrderProduct ordenProduct : this.orderProducts) {// Recorremos la lista de productos
 
             if (ordenProduct != null && ordenProduct.getTotalItem() != null) {
                 totalPrice = totalPrice.add(ordenProduct.getTotalItem()); // Sumamos el total de cada producto
