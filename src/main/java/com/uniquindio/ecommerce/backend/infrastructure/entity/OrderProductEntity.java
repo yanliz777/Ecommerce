@@ -3,7 +3,6 @@ package com.uniquindio.ecommerce.backend.infrastructure.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 
 @Entity//Con esto le decimos a spring que esta clase tiene que mapearse a la BD
@@ -19,7 +18,12 @@ public class OrderProductEntity {
     private BigDecimal quantity;
     private BigDecimal price;
     private Integer productId;//Realcionamos Orden con Producto por medio de su Id.
-
-    @ManyToOne//Muchos OrderProductEntity pertenecen a una OrderEntity
+    /*
+    Many: Esta claseEntidad(OrderProductEntity)
+    One: Del atributo(OrderEntity), entonces
+    Muchas OrderProductEntity(detalles) pertenecen a una OrderEntity(Maestro) y
+    Una OrderEntity puede pertenecer a Muchas OrderProductEntity
+     */
+    @ManyToOne
     private OrderEntity orderEntity;//para saber a que OrderEntity pertenece
 }

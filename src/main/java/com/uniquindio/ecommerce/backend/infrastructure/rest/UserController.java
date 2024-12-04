@@ -2,12 +2,16 @@ package com.uniquindio.ecommerce.backend.infrastructure.rest;
 
 import com.uniquindio.ecommerce.backend.application.UserService;
 import com.uniquindio.ecommerce.backend.domain.model.User;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 //http://localhost:8085
 @RequestMapping("/api/v1/users")
 //http://localhost:8085/api/v1/users: para acceder a este controlador
+@Slf4j//para mostrar los logs
 public class UserController {
 
     //inyectamos por constructor nuestro UserService:
@@ -22,8 +26,9 @@ public class UserController {
    Y lo que hace @RequestBody es convertir un archivo Json a un Objeto java
    */
     @PostMapping("/saveUser")
-    public User save(@RequestBody User user) {
-        return userService.save(user);
+    public ResponseEntity<User> save(@RequestBody User user) {
+        log.info("Nombre User: {}", user.getFirstname());
+        return  new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 
     /*
@@ -32,7 +37,7 @@ public class UserController {
     tipo de dato que tengo en los parametros(Integer)
      */
     @GetMapping("/findById/{id}")
-    public User findById(@PathVariable Integer id ) {
-        return userService.findById(id);
+    public ResponseEntity<User> findById(@PathVariable Integer id ) {
+        return ResponseEntity.ok(userService.findById(id));
     }
 }

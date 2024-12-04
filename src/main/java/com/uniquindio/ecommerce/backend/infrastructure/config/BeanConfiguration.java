@@ -1,9 +1,11 @@
 package com.uniquindio.ecommerce.backend.infrastructure.config;
 
 import com.uniquindio.ecommerce.backend.application.CategoryService;
+import com.uniquindio.ecommerce.backend.application.OrderService;
 import com.uniquindio.ecommerce.backend.application.ProductService;
 import com.uniquindio.ecommerce.backend.application.UserService;
 import com.uniquindio.ecommerce.backend.domain.port.ICategoryRepository;
+import com.uniquindio.ecommerce.backend.domain.port.IOrdenRepository;
 import com.uniquindio.ecommerce.backend.domain.port.IProductRepository;
 import com.uniquindio.ecommerce.backend.domain.port.IUserRepository;
 import org.springframework.context.annotation.Bean;
@@ -52,5 +54,10 @@ public class BeanConfiguration {
     @Bean
     public ProductService productService(IProductRepository iProductRepository) {
         return new ProductService(iProductRepository);
+    }
+
+    @Bean
+    public OrderService orderService(IOrdenRepository iOrdenRepository){
+        return new OrderService(iOrdenRepository);
     }
 }
