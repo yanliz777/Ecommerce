@@ -33,6 +33,7 @@ public class OrderController {
     @PostMapping("/update/state/order")
     public ResponseEntity updateStateById(@RequestParam Integer id,
                                           @RequestParam String state) {
+        log.info("Actualizando estado de la orden con id: {} a estado: {}", id, state);
         orderService.updateStateByOrderId(id, state);
         return ResponseEntity.ok().build();
     }

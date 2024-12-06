@@ -1,5 +1,6 @@
 package com.uniquindio.ecommerce.backend.infrastructure.adapter;
 
+import com.uniquindio.ecommerce.backend.domain.model.enums.OrderState;
 import com.uniquindio.ecommerce.backend.infrastructure.entity.OrderEntity;
 import com.uniquindio.ecommerce.backend.infrastructure.entity.UserEntity;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,7 +14,7 @@ public interface IOrderCrudRepository extends CrudRepository<OrderEntity, Intege
     @Transactional
     @Modifying
     @Query("UPDATE OrderEntity o SET o.state = :state WHERE o.id = :id")
-    void updateStateByOrderId(Integer id, String state);
+    void updateStateByOrderId(Integer id, OrderState state);
 
     Iterable<OrderEntity> findByUserEntity(UserEntity userEntity);
 }

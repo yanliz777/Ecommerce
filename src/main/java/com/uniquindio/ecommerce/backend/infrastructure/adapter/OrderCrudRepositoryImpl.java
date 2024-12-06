@@ -81,9 +81,9 @@ public class OrderCrudRepositoryImpl implements IOrdenRepository {
     @Override
     public void updateStateByOrderId(Integer orderId, String state) {
         if (state.equals(OrderState.CANCELLED)){
-            iOrderCrudRepository.updateStateByOrderId(orderId,OrderState.CANCELLED.toString());
+            iOrderCrudRepository.updateStateByOrderId(orderId,OrderState.CANCELLED);
         }else {
-            iOrderCrudRepository.updateStateByOrderId(orderId,OrderState.CONFIRMED.toString());
+            iOrderCrudRepository.updateStateByOrderId(orderId,OrderState.CONFIRMED);
         }
     }
 }
