@@ -1,7 +1,6 @@
 package com.uniquindio.ecommerce.backend.infrastructure.rest;
 
 import com.uniquindio.ecommerce.backend.application.ProductService;
-import com.uniquindio.ecommerce.backend.domain.model.Category;
 import com.uniquindio.ecommerce.backend.domain.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +10,15 @@ import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@Slf4j//para mostrar los logs
+//para mostrar los logs:
+@Slf4j
+/*
+@CrossOrigin(origins = "http://localhost:4200"), le estás diciendo al
+backend que permita solicitudes CORS únicamente desde el origen
+especificado (http://localhost:4200). Es decir, le indicamos a spring boot que cliente
+va aconsumir esta API REST:
+ */
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/admin/products")
 public class ProductController {
 

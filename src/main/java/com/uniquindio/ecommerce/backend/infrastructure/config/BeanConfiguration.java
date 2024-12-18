@@ -32,7 +32,7 @@ public class BeanConfiguration {
     spring lo gestione. Cabe recordar que a esta clase "UserService" se le inyecta
     la interface "IUserRepository"  y lo mismo pasa con CategoryService que se le
     inyecta ICategoryRepository, por eso lo enviamos por parametro en ests metodos. De esta
-    maenra conectamos la clase UserService que esta en la clase de aplicación con la
+    maenra conectamos la clase UserService que esta en el paquete de aplicación con la
     con la clase que implemneta los métodos CRUD especificos para la BD(UserCrudRepositoryImpl,
     CategoryCrudRepositoryImpl).
 
